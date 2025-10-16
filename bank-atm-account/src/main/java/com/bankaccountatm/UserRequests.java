@@ -8,12 +8,16 @@ import java.time.format.*;
 public class UserRequests {
     private static Scanner sc;
     
-    public static void getOpenBalance(Account account, ArrayList<Account> accounts) {
+    public static void getOpenBalance(Account account, ArrayList<Account> accounts) throws Exception{
+        Progress.buffer(300, "PROCESSING");
         DateTimeFormatter format  = DateTimeFormatter.ofPattern("yyyy-mm-dd | HH:mm:ss");
         System.out.println("--------WITHDRAWAL RECEIPT---------");
         System.out.println("ACCOUNT NO.     " + account.getAccountNum() 
                          + "\nNEW BAL.      " + account.getBalance()
                          + "\nDate of Req.  " + LocalDateTime.now().format(format));
+        Thread.sleep(1000);
+        Progress.buffer(300, "RETURNING TO MENU");
+        Main.Menu();
     }
 
     public static void depositCash(Account account, ArrayList<Account> list) throws Exception {
@@ -29,12 +33,14 @@ public class UserRequests {
             double newbal = oldbal + amount;
             account.setBalance(newbal);
             DataHelper.storeDataToJSON(list);
-            Progress.buffer(300, "DEPOSIT REQUEST SUCESSFUL!");
+            Progress.buffer(300, "PROCESSING");
             list = DataHelper.retrieveDataFromJSON();
             depositReceipt(oldbal, account, list); 
+            Progress.buffer(300, "DEPOSIT REQUEST SUCESSFUL!");
         }
         Thread.sleep(1000);
         Progress.buffer(300, "RETURNING TO MENU");
+        Main.Menu();
     }
 
     public static void cashWithdrawal(Account account, ArrayList<Account> list) throws Exception {
@@ -50,12 +56,14 @@ public class UserRequests {
             double newbal = oldbal - amount;
             account.setBalance(newbal);
             DataHelper.storeDataToJSON(list);
-            Progress.buffer(300, "WITHDRAWAL REQUEST SUCESSFUL!");
+            Progress.buffer(300, "PROCESSING");
             list = DataHelper.retrieveDataFromJSON();
             withdrawalReceipt(oldbal, account, list); 
+            Progress.buffer(300, "WITHDRAWAL REQUEST SUCESSFUL!");
         }
         Thread.sleep(1000);
         Progress.buffer(300, "RETURNING TO MENU");
+        Main.Menu();
     }
 
     public static void withdrawalReceipt(double temp, Account account, ArrayList<Account> list) {

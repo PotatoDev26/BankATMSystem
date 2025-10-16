@@ -6,12 +6,32 @@
   },
   {
     "accountNumber": 10001,
-    "balance": 50000.0,
+    "balance": 45000.0,
     "pinCode": 2624
   },
   {
     "accountNumber": 10002,
     "balance": 10000.0,
     "pinCode": 3461
+  },
+  {
+    "accountNumber": 10003,
+    "balance": 50000.0,
+    "pinCode": 7891
+  },
+  {
+    "accountNumber": 10004,
+    "balance": 80000.0,
+    "pinCode": 6724
+  },
+  {
+    "accountNumber": 10005,
+    "balance": 20000.0,
+    "pinCode": 9123
+  },
+  {
+    "accountNumber": 10006,
+    "balance": 80000.0,
+    "pinCode": 6543
   }
 ]

@@ -23,22 +23,24 @@ public class Account {
     }
     //add input validation #
     public void setBalance(double balance) throws Exception {
-        if(balance < 0) {
-            System.out.println("BALANCE MUST NOT BE IN NEGATIVES");
-            Main.accountCreation();
-        } else {
-            this.balance = balance;
-        }
+        this.balance = balance;
     }
     //add limitiations #
     public void setPinCode(int pin) throws Exception {
-        String strung = Integer.toString(pin);
-        if(strung.length() != 4) {
-            System.out.println("BASTA ERROR");
-            Main.accountCreation();
-        }  else {
-            this.pinCode = Integer.valueOf(strung);
+        this.pinCode = pin;
+    }
+    public static boolean isFourDigits(int num) {
+        String strPin = Integer.toString(num);
+        if(strPin.length() > 4) {
+            return false;
         }
+        return true;
+    }
+    public static boolean balanceIsNotZeroOrNegative(double num) {
+        if(num <= 0) {
+            return false;
+        }
+        return true;
     }
     //--------------------------------------------------------------------------------------------
     //getters--------------------------------------------------------------------------------------------

@@ -45,7 +45,6 @@ public class DataHelper {
                 }
             }
         }
-
         if (!fileHasData) {
             Account.accounts.add(account);
         } else {

@@ -23,11 +23,19 @@ public class Main extends UserRequests implements Progress {
         DataHelper.checkIfFileHasNoContent(new Account(INI_SERIAL_NUM, 0.0, 0));
         for(Account account : DataHelper.retrieveDataFromJSON()) setAccountObj(account);
         int number = getAccountObj().getAccountNum() + 1;
-        Account acc = new Account(number, bal, pin);
         Progress.buffer(300, "PROCESSING");
+        if(!Account.isFourDigits(pin)) {
+            Progress.buffer("INPUT DIGIT MUST NOT BE MORE THAN 4\nREDIRECTING");
+            return;                
+        }
+        if(!Account.balanceIsNotZeroOrNegative(bal)) {
+            Progress.buffer("BALANCE MUST NOT BE IN NEGATIVES or ZERO");
+            Main.accountCreation();
+        }
         Progress.buffer(300, "GENERATING ACCOUNT NUMBER");
         Progress.buffer(300, "FINALIZING ACCOUNT");
         System.out.println("ACCOUNT CREATED!");
+        Account acc = new Account(number, bal, pin);
         Account.showCreatedAcc(acc);
         DataHelper.storeDataToJSON(Account.accounts);
         Thread.sleep(1000);
@@ -43,25 +51,32 @@ public class Main extends UserRequests implements Progress {
         int blnc = sc.nextInt();
         createAccount(pin, blnc, pin);
     }
+    protected static void confirmedPin(Account account, ArrayList<Account> accountList) throws Exception {
+        Progress.buffer(300, "CHECKING IF PIN CODE AND ACCOUNT EXISTS");
+        System.out.println("PIN EXISTS!");
+        SelectOperation(account, accountList);
+    }
     //--------------------------------------------------------------------------------------------------
     protected static void EnterPinToLog() throws Exception {
         ArrayList<Account> accountList = DataHelper.retrieveDataFromJSON();
         sc = new Scanner(System.in);
+        boolean confirmPin = false;
         System.out.println("Enter PIN number: ");
         String pin = sc.nextLine();
-        for(Account account : accountList) {
-            if(Integer.valueOf(pin) != account.getPinCode()) {
-                System.out.println("");
-            } else {
-                Progress.buffer(300, "CHECKING IF PIN CODE AND ACCOUNT EXISTS");
-                System.out.println("PIN EXISTS!");
-                SelectOperation(account, accountList);
+        for(Account accs : accountList) {
+            if(Integer.valueOf(pin) == accs.getPinCode()) {
+                setAccountObj(accs);
+                confirmPin = true;
             }
-        }    
-        System.err.println("PIN DOES NOT EXIST");
-        Thread.sleep(500);
-        Progress.buffer(300, "REDIRECTING");
-        Menu();
+        }
+        if(!confirmPin) {
+            System.err.println("PIN DOES NOT EXIST");
+            Thread.sleep(500);
+            Progress.buffer(300, "REDIRECTING");
+            Menu();
+        } else {
+            confirmedPin(getAccountObj(), accountList);
+        }
     }
     //--------------------------------------------------------------------------------------------------
     protected static void SelectOperation(Account account, ArrayList<Account> list) throws Exception {
@@ -74,7 +89,7 @@ public class Main extends UserRequests implements Progress {
             case 2 -> UserRequests.depositCash(account, list);
             case 3 -> UserRequests.getOpenBalance(account, list);
             case 4 -> Menu();
-            default -> Progress.buffer(300, "");
+            default -> SelectOperation(account, list);
         }
     }
     //Menu user function--------------------------------------------------------------------------------
