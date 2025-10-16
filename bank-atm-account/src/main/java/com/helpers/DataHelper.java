@@ -7,11 +7,11 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
 public class DataHelper {
-    static final String jsonDir = "C:\\Users\\Matthew\\Desktop\\Folders" 
+    private static final String jsonDir = "C:\\Users\\Matthew\\Desktop\\Folders" 
                                 + "\\Progamming\\Java\\recent\\maven projects"
                                 + "\\bank-atm-account\\src\\main\\resources\\data";
-    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    static final String fileName = "accounts-records.json";
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static final String fileName = "accounts-records.json";
     private static final File file = new File(jsonDir, fileName);
 
     public static ArrayList<Account> retrieveDataFromJSON() throws Exception {

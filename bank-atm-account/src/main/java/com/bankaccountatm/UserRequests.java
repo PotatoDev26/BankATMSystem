@@ -19,7 +19,6 @@ public class UserRequests {
         Progress.buffer(300, "RETURNING TO MENU");
         Main.Menu();
     }
-
     public static void depositCash(Account account, ArrayList<Account> list) throws Exception {
         sc = new Scanner(System.in);
         System.out.println("----------DEPOSIT CASH-----------");
@@ -42,7 +41,6 @@ public class UserRequests {
         Progress.buffer(300, "RETURNING TO MENU");
         Main.Menu();
     }
-
     public static void cashWithdrawal(Account account, ArrayList<Account> list) throws Exception {
         sc = new Scanner(System.in);
         System.out.println("----------CASH WITHDRAW-----------");
@@ -65,7 +63,6 @@ public class UserRequests {
         Progress.buffer(300, "RETURNING TO MENU");
         Main.Menu();
     }
-
     public static void withdrawalReceipt(double temp, Account account, ArrayList<Account> list) {
         System.out.println("--------WITHDRAWAL RECEIPT---------");
         System.out.println("ACCOUNT NO.   " + account.getAccountNum() 
@@ -73,7 +70,6 @@ public class UserRequests {
                          + "\nNEW BAL.      " + account.getBalance()
                          + "\nPIN CODE      " + PinEncrypt.pinToHash(account.getPinCode()));
     }
-    
     public static void depositReceipt(double oldbal, Account account, ArrayList<Account> list) {
         System.out.println("--------WITHDRAWAL RECEIPT---------");
         System.out.println("ACCOUNT NO.   " + account.getAccountNum() 

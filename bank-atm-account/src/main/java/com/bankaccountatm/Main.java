@@ -4,9 +4,9 @@ import com.Progress;
 import com.helpers.DataHelper;
 
 public class Main extends UserRequests implements Progress {
-    static final int INI_SERIAL_NUM = 10000; 
+    private static final int INI_SERIAL_NUM = 10000; 
     private static Account accountObj;
-    static Scanner sc;
+    private static Scanner sc;
     //program switch function DO NOT TOUCH!!!-----------------------------------------------------------
     private static void Execute() throws Exception {
         Menu();
