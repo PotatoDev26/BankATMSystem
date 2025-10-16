@@ -13,7 +13,7 @@ public class DataHelper {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     static final String fileName = "accounts-records.json";
     private static final File file = new File(jsonDir, fileName);
-    //-----------------------------------------------------------------------------------
+
     public static ArrayList<Account> retrieveDataFromJSON() throws Exception {
         ArrayList<Account> accs = new ArrayList<>();
         try (FileReader reader = new FileReader(file)) {
@@ -22,39 +22,37 @@ public class DataHelper {
         } 
         return accs;
     }
-    //------------------------------------------------------------------------------------
     public static void storeDataToJSON(ArrayList<Account> account) throws Exception{
         FileWriter record = new FileWriter(file);
         gson.toJson(account, record);
         record.close();
     }
-    //-------------------------------------------------------------------------------------
-    static void readSequence(File file, boolean hasData) throws Exception{
-        if (file.length() > 0) {
-            try(FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr)) { 
-                int ch;
-                while ((ch = br.read()) != -1) {
-                    if (!Character.isWhitespace(ch)) {
-                        break;
-                    }
+    //
+    public static void checkIfFileHasNoContent(Account account) throws Exception {
+        File file = getFile();
+        // Quick checks that avoid nested blocks
+        if (file == null || !file.exists() || file.length() == 0) {
+            Account.accounts.add(account);
+            return;
+        }
+        boolean fileHasData = false;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            int ch;
+            while ((ch = br.read()) != -1) {
+                if (!Character.isWhitespace(ch)) {
+                    fileHasData = true;
+                    break;
                 }
             }
         }
-    }
-    //--------------------------------------------------------------------------------------
-    public static void checkIfFileHasNoContent(Account account) throws Exception {
-        File file = getFile();
-        boolean fileHasData = false;
-        if (file != null && file.exists()) {
-            readSequence(file, fileHasData);
-        }
-        if(!fileHasData) {
+
+        if (!fileHasData) {
             Account.accounts.add(account);
         } else {
-            Account.accounts = DataHelper.retrieveDataFromJSON();
+            Account.accounts = retrieveDataFromJSON();
         }
     }
+// ...existing code...
     public static File getFile() {
         return file;
     }

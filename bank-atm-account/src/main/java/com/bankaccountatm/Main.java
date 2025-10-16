@@ -22,7 +22,8 @@ public class Main extends UserRequests implements Progress {
     protected static void createAccount(int accnum, double bal, int pin) throws Exception {
         DataHelper.checkIfFileHasNoContent(new Account(INI_SERIAL_NUM, 0.0, 0));
         for(Account account : DataHelper.retrieveDataFromJSON()) setAccountObj(account);
-        Account acc = new Account(getAccountObj().getAccountNum() + 1, bal, pin);
+        int number = getAccountObj().getAccountNum() + 1;
+        Account acc = new Account(number, bal, pin);
         Progress.buffer(300, "PROCESSING");
         Progress.buffer(300, "GENERATING ACCOUNT NUMBER");
         Progress.buffer(300, "FINALIZING ACCOUNT");
