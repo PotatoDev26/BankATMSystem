@@ -1,17 +1,32 @@
 [
   {
-    "accountNumber": 10031,
-    "balance": 7674783.0,
-    "pinCode": 7832
+    "accountNumber": 10000,
+    "balance": 0.0,
+    "pinCode": 0
   },
   {
-    "accountNumber": 10011,
-    "balance": 567331.0,
+    "accountNumber": 100001,
+    "balance": 9000.0,
+    "pinCode": 7819
+  },
+  {
+    "accountNumber": 100002,
+    "balance": 10500.0,
     "pinCode": 2624
   },
   {
-    "accountNumber": 10031,
-    "balance": 5.6672832E7,
-    "pinCode": 5250
+    "accountNumber": 100003,
+    "balance": 7000.0,
+    "pinCode": 3671
+  },
+  {
+    "accountNumber": 100004,
+    "balance": 5000.0,
+    "pinCode": 5851
+  },
+  {
+    "accountNumber": 100005,
+    "balance": 50000.0,
+    "pinCode": 1524
   }
 ]

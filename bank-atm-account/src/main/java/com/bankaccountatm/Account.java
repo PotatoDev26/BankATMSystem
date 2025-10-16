@@ -1,17 +1,22 @@
 package com.bankaccountatm;
 import java.util.*;
 
-public class BankAccount {
+public class Account {
+    public static ArrayList<Account> accounts = new ArrayList<>();
     private int accountNumber;
     private double balance;
     private int pinCode;
-    protected static ArrayList<BankAccount> accounts = new ArrayList<>();
 
-    public BankAccount() {
-
+    public Account(int accNum, double bal, int pin) {
+        this.accountNumber = accNum;
+        this.balance = bal;
+        this.pinCode = pin;
     }
-
+    public Account() {}
     //setters--------------------------------------------------------------------------------------------
+    public static void addToHash(Account account) {
+        Account.accounts.add(account);
+    }
     //add limitations #
     public void setAccountNumber(int accnum) throws Exception {
         this.accountNumber = accnum;
@@ -19,7 +24,7 @@ public class BankAccount {
     //add input validation #
     public void setBalance(double balance) throws Exception {
         if(balance < 0) {
-            System.out.println("BALANCE MUST NOT BE IN NEGATIVES (whatever the fuck that means)");
+            System.out.println("BALANCE MUST NOT BE IN NEGATIVES");
             Main.accountCreation();
         } else {
             this.balance = balance;
@@ -36,7 +41,6 @@ public class BankAccount {
         }
     }
     //--------------------------------------------------------------------------------------------
-
     //getters--------------------------------------------------------------------------------------------
     public int getAccountNum() {
         return this.accountNumber;
@@ -48,18 +52,18 @@ public class BankAccount {
         return this.pinCode;
     }
     public static void showObjectList() {
-        for(BankAccount obj : accounts) {
+        for(Account obj : accounts) {
             System.out.println(obj.getPinCode());
         }
     }
     //--------------------------------------------------------------------------------------------
-    
-    public static void showCreatedAcc(BankAccount acc) {
+    public static void showCreatedAcc(Account acc) {
         System.out.println("-------------------------------------------------------");
         System.out.println("Account Number: " + acc.getAccountNum() 
             + "\nAccount Balance: " + acc.getBalance() 
             + "\nPIN Code: " + acc.getPinCode());
         System.out.println("-------------------------------------------------------");
+        Account.accounts.add(acc);
     }
 }
 
