@@ -1,0 +1,14 @@
+Day 1 Progress:
+- Main wiring and dependency injections have been deployed
+- Controller run function deployed on Main
+- Deployed project to repository
+
+Things left to do:
+- Finalize addTask() function, stare at retrieveTasks() function for 2 hours
+  or more till you solve and construct the logical algorithm and design pattern.
+- Conceptualize and build logic for removeTask() function
+- Double check for any left over methods and re-check injections
+- Confirm if all features have been accounted for
+- Finish client-side controller
+- Update to git repository
+

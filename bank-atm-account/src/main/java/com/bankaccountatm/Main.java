@@ -2,7 +2,14 @@ package com.bankaccountatm;
 import java.util.*;
 import com.Progress;
 import com.helpers.DataHelper;
-
+/*
+ * THINGS LEFT TO DO:
+ * - Make a function to check user tries to create an account with a pin that already exists
+ * - Fix formatting when displaying receipts, add dates
+ * - Add another key to store date and time values of account creation or update
+ * - (Optional) Improve account number format (e.g date-digits(3)-incremental value)
+ * 
+ */
 public class Main extends UserRequests implements Progress {
     private static final int INI_SERIAL_NUM = 10000; 
     private static Account accountObj;
@@ -23,10 +30,10 @@ public class Main extends UserRequests implements Progress {
         DataHelper.checkIfFileHasNoContent(new Account(INI_SERIAL_NUM, 0.0, 0));
         for(Account account : DataHelper.retrieveDataFromJSON()) setAccountObj(account);
         int number = getAccountObj().getAccountNum() + 1;
-        Progress.buffer(300, "PROCESSING");
+        Progress.buffer(300, "CHECKING IF PIN ALREADY EXISTS...");
         if(!Account.isFourDigits(pin)) {
             Progress.buffer("INPUT DIGIT MUST NOT BE MORE THAN 4\nREDIRECTING");
-            return;                
+            Main.accountCreation();        
         }
         if(!Account.balanceIsNotZeroOrNegative(bal)) {
             Progress.buffer("BALANCE MUST NOT BE IN NEGATIVES or ZERO");
@@ -47,8 +54,17 @@ public class Main extends UserRequests implements Progress {
         sc = new Scanner(System.in);
         System.out.println("Create PIN: ");
         int pin = sc.nextInt();
+        if(!Account.isFourDigits(pin)) {
+            Progress.buffer("INPUT DIGIT MUST NOT BE MORE THAN 4\nREDIRECTING");
+            Main.accountCreation();        
+        }
         System.out.println("Deposit balance: ");
         int blnc = sc.nextInt();
+        if(!Account.balanceIsNotZeroOrNegative(blnc)) {
+            Progress.buffer("BALANCE MUST NOT BE IN NEGATIVES or ZERO");
+            Main.accountCreation();
+        }
+        Progress.buffer(300, "PROCESSING");
         createAccount(pin, blnc, pin);
     }
     protected static void confirmedPin(Account account, ArrayList<Account> accountList) throws Exception {
@@ -85,7 +101,7 @@ public class Main extends UserRequests implements Progress {
         System.out.println("1. Withdraw\n2. Deposit\n3. Check Balance\n4. Back");
         String select = sc.nextLine();
         switch(Integer.valueOf(select)) {
-            case 1 -> UserRequests.cashWithdrawal(account, list);
+            case 1 -> UserRequests.cashWithdrawal(account, list); 
             case 2 -> UserRequests.depositCash(account, list);
             case 3 -> UserRequests.getOpenBalance(account, list);
             case 4 -> Menu();
@@ -99,14 +115,15 @@ public class Main extends UserRequests implements Progress {
         //operations: create, deposit, withdraw, show
         System.out.println("Select operation:\n1. Log In Account (PIN)\n2. Create Account\n3. Exit");
         switch(sc.nextInt()) {
-            case 1: EnterPinToLog(); break;
-            case 2: accountCreation(); break;
-            case 3: Progress.buffer(500, "EXITING PROGRAM");
+            case 1 -> EnterPinToLog(); 
+            case 2 -> accountCreation(); 
+            case 3 -> 
+                { 
+                    Progress.buffer(500, "EXITING PROGRAM");
                     System.out.println("\nHAVE A GOOD DAY!");
-                    System.exit(0); break;
-            default: 
-                Progress.buffer(300, ""); 
-                break;
+                    System.exit(0); 
+                }
+            default -> Progress.buffer(300, ""); 
         }
     }
     public static void main(String[] args) throws Exception {
