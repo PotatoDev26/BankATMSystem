@@ -1,4 +1,4 @@
-Day 1 Progress:
+Day 1 Progress Report:
 - Main wiring and dependency injections have been deployed
 - Controller run function deployed on Main
 - Deployed project to repository
@@ -12,3 +12,46 @@ Things left to do:
 - Finish client-side controller
 - Update to git repository
 
+
+Day 2 Progress Report:
+- Removed Task attributes (taskID(int), Progress|state(enum))
+- Updated functions on TaskController:
+    - void AddTaskSequence
+    - void RemoveTaskSequence
+    - void DisplayListTaskSequence
+- Added new function in TaskJSONRepository
+    - boolean ifFileNotExistOrEmpty
+- Renamed return types getFile -> getJSONFile
+- Removed global ArrayList variable "objectTask"
+- Changed the throw Exception(s) on TaskService(class), TaskRepository(interface),
+  TaskJSONRepository(class)
+- Overall: Incomplete, still need tweaks on the main functions (add, remove, display)
+- Last Action: Update main git
+
+
+
+
+
+
+
+
+//CODE BOILERPLATE
+return type function:
+ArrayList<Task> tasker = new ArrayList<>();
+        boolean metCondition = false;
+        if (getFile() == null || !getFile().exists() || getFile().length() == 0) {
+            System.out.println("F**K NO FILES? GGWP");
+        }
+        try (BufferedReader bfr = new BufferedReader(new FileReader(getFile()))) {
+            int ch;
+            while ((ch = bfr.read()) != -1) {
+                if (!Character.isWhitespace(ch)) {
+                    metCondition = true;
+                    break;
+                }
+            }
+        }
+        if (!metCondition) {
+            System.out.println("E-E-E-E-E-E-E-E");
+        }
+        return getTasks();

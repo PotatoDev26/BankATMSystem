@@ -9,12 +9,15 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void addTask(String taskName, String taskDescription, int taskID, Progress state) {
-        Task task = new Task(taskName, taskDescription, taskID, state);
-        taskRepository.saveTask(task);
+    public void addTask(String taskName, String taskDescription) throws Exception {
+        taskRepository.saveTask(new Task(taskName, taskDescription));
     }
 
-    public ArrayList<Task> getAllTask() {
-        return taskRepository.retrieveTask();
+    public ArrayList<Task> getAllTask() throws Exception {
+        return taskRepository.retrieveTasks();
+    }
+
+    public void removeTask(String task) throws Exception {
+        taskRepository.deleteTask(task);
     }
 }

@@ -3,14 +3,14 @@ package com.taskmanager;
 public class Task {
     private String taskName;
     private String taskDescription;
-    private int taskID;
-    private Progress state;
+    // private int taskID;
+    // private Progress state;
 
-    public Task(String taskName, String taskDescription, int taskID, Progress state) {
+    public Task(String taskName, String taskDescription) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        this.taskID = taskID;
-        this.state = state;
+        // this.taskID = taskID;
+        // this.state = state;
     }
     // Setters
 
@@ -22,13 +22,13 @@ public class Task {
         this.taskDescription = taskDescription;
     }
 
-    public void setTaskID(int taskID) {
-        this.taskID = taskID;
-    }
+    // public void setTaskID(int taskID) {
+    // this.taskID = taskID;
+    // }
 
-    public void setTaskIsCompletes(Progress state) {
-        this.state = state;
-    }
+    // public void setTaskIsCompletes(Progress state) {
+    // this.state = state;
+    // }
 
     public String getTaskName() {
         return taskName;
@@ -38,13 +38,13 @@ public class Task {
         return taskDescription;
     }
 
-    public int getTaskID() {
-        return taskID;
-    }
+    // public int getTaskID() {
+    // return taskID;
+    // }
 
-    public Progress isTaskIsCompletes() {
-        return this.state;
-    }
+    // public Progress isTaskIsCompletes() {
+    // return this.state;
+    // }
 
 }
 

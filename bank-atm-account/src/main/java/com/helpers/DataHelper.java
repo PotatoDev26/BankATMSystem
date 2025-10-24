@@ -34,7 +34,6 @@ public class DataHelper {
     //
     public static void checkIfFileHasNoContent(Account account) throws Exception {
         File file = getFile();
-        // Quick checks that avoid nested blocks
         if (file == null || !file.exists() || file.length() == 0) {
             Account.accounts.add(account);
             return;
@@ -56,7 +55,6 @@ public class DataHelper {
         }
     }
 
-    // ...existing code...
     public static File getFile() {
         return file;
     }
