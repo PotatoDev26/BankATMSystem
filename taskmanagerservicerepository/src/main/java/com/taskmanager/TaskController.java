@@ -1,5 +1,6 @@
 package com.taskmanager;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TaskController {
@@ -24,32 +25,38 @@ public class TaskController {
                 + "3. Display list of tasks\n"
                 + "4. Mark a task as complete\n"
                 + "5. Exit");
-        try (Scanner sc = new Scanner(System.in)) {
-            switch (sc.nextInt()) {
-                case 1 -> AddTaskSequence();
-                case 2 -> RemoveTaskSequence();
-                case 3 -> DisplayListTaskSequence();
-                case 4 -> MarkTaskCompleteSequence();
-                case 5 -> {
+
+        try {
+            Scanner sc = new Scanner(System.in);
+            String choice = Integer.toString(sc.nextInt());
+            switch (choice) {
+                case "" -> System.out.println("INPUT IS BLANK");
+                case "1" -> AddTaskSequence();
+                case "2" -> RemoveTaskSequence();
+                case "3" -> {
+                    DisplayListTaskSequence();
+                    Main();
+                }
+                case "4" -> MarkTaskCompleteSequence();
+                case "5" -> {
                     System.out.println("EXIT PROGRAM");
                     System.exit(0);
                 }
-                default -> {
-                    System.out.println("WRONG!");
-                    Main();
-                }
             }
+        } catch (InputMismatchException ex) {
+            System.out.println("INVALID INPUT!");
+            Main();
         }
     }
 
     private void AddTaskSequence() throws Exception {
-        try (Scanner sc = new Scanner(System.in)) {
-            System.out.println("Add task name: ");
-            String name = sc.nextLine();
-            System.out.println("Add a description: ");
-            String description = sc.nextLine();
-            service.addTask(name, description);
-        }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Add task name: ");
+        String name = sc.nextLine();
+        System.out.println("Add a description: ");
+        String description = sc.nextLine();
+        service.addTask(name, description);
+
         Main();
     }
 
@@ -63,7 +70,7 @@ public class TaskController {
 
         switch (confirmation) {
             case "Y" -> {
-                System.out.println("DELETING TASK....");
+                System.out.println("CHECKING IF THE TASK EXISTS....");
                 service.removeTask(taskString);
                 Main();
             }
@@ -85,16 +92,16 @@ public class TaskController {
                     + "\nTask Description: " + task.getTaskDescription());
         }
         System.out.println("----------------------------");
-        Main();
     }
 
-    public static void getMain() throws Exception {
-        TaskController controller = null;
-        controller.Main();
+    public static void getMain(TaskController controller, boolean mainSwitch) throws Exception {
+        TaskController control = controller;
+        if (mainSwitch) {
+            control.Main();
+        }
     }
 
     private void MarkTaskCompleteSequence() throws Exception {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'MarkTaskCompleteSequence'");
     }
 

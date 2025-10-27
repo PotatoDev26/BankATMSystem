@@ -29,8 +29,16 @@ Day 2 Progress Report:
 - Last Action: Update main git
 
 
-
-
+Day 3 Progress Report:
+- Added new functions in TaskJSONRepository
+    - boolean ifFileNotExistOrEmpty();
+    - void finalizeSaveTask(ArrayList, Task)
+    - void finalizeDeleteTask(ArrayList, Task)
+- Updated functions add, remove, display, retrieve functions on TaskController
+  and TaskJSONRepository
+- Overall: All use case functions have been completed and updated. (Still open for
+  reconstruction for scalability)
+- Last Action: Update main git
 
 
 

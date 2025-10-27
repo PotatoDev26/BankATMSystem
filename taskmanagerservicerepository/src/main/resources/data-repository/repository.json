@@ -1,0 +1,26 @@
+[
+  {
+    "taskName": "Task 1",
+    "taskDescription": "Clean car"
+  },
+  {
+    "taskName": "Task 2",
+    "taskDescription": "Clean car"
+  },
+  {
+    "taskName": "Task 5",
+    "taskDescription": "Clean car"
+  },
+  {
+    "taskName": "Task 6",
+    "taskDescription": "Clean car"
+  },
+  {
+    "taskName": "Task 3",
+    "taskDescription": "Create a chatbot using Gemini API wrapper"
+  },
+  {
+    "taskName": "Task 4",
+    "taskDescription": "Create speed"
+  }
+]
