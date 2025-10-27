@@ -36,11 +36,19 @@ Day 3 Progress Report:
     - void finalizeDeleteTask(ArrayList, Task)
 - Updated functions add, remove, display, retrieve functions on TaskController
   and TaskJSONRepository
-- Overall: All use case functions have been completed and updated. (Still open for
+- Overall: Add, delete, and display use case functions have been completed and updated. (Still open for
   reconstruction for scalability)
 - Last Action: Update main git
 
+Things left to do: 
+- Add Task attributes (taskID(int), Progress|state(enum))
+- Construct use case algorithm for newly implemented attributes on TaskController and TaskJSONRepository
+- Create a buffer class simulation using Thread.sleep()
+- Check for bugs, unhandled exceptions, input validations, and callbacks
+- Finalize client-side controller  
 
+Day 4 Progress Report:
+- Updated the java version to JDK 25
 
 
 //CODE BOILERPLATE

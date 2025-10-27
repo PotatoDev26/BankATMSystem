@@ -1,7 +1,7 @@
 package com.taskmanager;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    void main() throws Exception {
         TaskRepository repository = new TaskJSONRepository();
         TaskService services = new TaskService(repository);
         TaskController taskController = new TaskController(services);
