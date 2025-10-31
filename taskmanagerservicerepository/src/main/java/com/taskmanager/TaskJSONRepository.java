@@ -2,8 +2,7 @@ package com.taskmanager;
 
 import java.util.*;
 import java.lang.reflect.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import java.io.*;
 
@@ -13,6 +12,7 @@ public class TaskJSONRepository implements TaskRepository {
     private final String fileName = "repository.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final File file = new File(getFilePath(), getFileName());
+    private static Task tempTask;
 
     @Override
     public void saveTask(Task task) throws FileNotFoundException, IOException, InterruptedException {
@@ -41,21 +41,33 @@ public class TaskJSONRepository implements TaskRepository {
     }
 
     @Override
-    public void deleteTask(String stringTask) throws FileNotFoundException, NullPointerException {
+    public void deleteTask(int taskID) throws FileNotFoundException, NullPointerException, InterruptedException {
         if (!ifFileNotExistOrEmpty(getJSONFILE())) {
             System.out.println("THERE ARE NO TASKS TO DELETE (JSON FILE IS EMPTY)...");
             return;
         } else {
             ArrayList<Task> taskList = retrieveTasks();
-            finalizeDeleteTask(taskList, stringTask);
+            finalizeDeleteTask(taskList, taskID);
         }
     }
 
-    private void finalizeDeleteTask(ArrayList<Task> map, String stringTask) {
+    @Override
+    public void markAsCompleteTask(int taskID, Progress state) throws Exception {
+        if (!ifFileNotExistOrEmpty(getJSONFILE())) {
+            System.out.println("THERE ARE NO TASKS TO DELETE (JSON FILE IS EMPTY)...");
+            return;
+        } else {
+            ArrayList<Task> taskList = retrieveTasks();
+            finalizeTaskState(taskList, taskID, state);
+        }
+    }
+
+    private void finalizeDeleteTask(ArrayList<Task> map, int taskID) throws InterruptedException {
+        BufferThread.buffer(500, "PROCESSING");
         boolean isEqual = false;
         int i = 0;
         for (Task obj : map) {
-            if (obj.getTaskName().equals(stringTask)) {
+            if (obj.getTaskID() == taskID) {
                 isEqual = true;
                 break;
             }
@@ -75,7 +87,11 @@ public class TaskJSONRepository implements TaskRepository {
         }
     }
 
-    private void finalizeSaveTask(ArrayList<Task> map, Task task) {
+    private void finalizeSaveTask(ArrayList<Task> map, Task task) throws InterruptedException {
+        BufferThread.buffer(500, "PROCESSING");
+        for (Task obj : map)
+            tempTask = obj;
+        task.setTaskID(tempTask.getTaskID() + 1);
         map.add(task);
         System.out.println("\n");
         try (FileWriter writer = new FileWriter(getJSONFILE())) {
@@ -86,10 +102,37 @@ public class TaskJSONRepository implements TaskRepository {
         System.out.println("TASK HAS BEEN ADDED TO JSON DATA FORMAT!");
     }
 
+    private void finalizeTaskState(ArrayList<Task> map, int taskID, Progress state) throws InterruptedException {
+        BufferThread.buffer(500, "PROCESSING");
+        boolean isEqual = false;
+        int i = 0;
+        for (Task obj : map) {
+            if (obj.getTaskID() == taskID) {
+                isEqual = true;
+                break;
+            }
+            i++;
+        }
+        if (isEqual) {
+            Task task = map.get(i);
+            // map.remove(task);
+            task.setTaskState(state);
+            // map.add(task);
+            try (FileWriter writer = new FileWriter(getJSONFILE())) {
+                gson.toJson(map, writer);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            System.out.println(task.getTaskName().toUpperCase() + " STATE HAS BEEN UPDATED!");
+        } else {
+            System.out.println("TASK DOES NOT EXIST!");
+        }
+    }
+
     private boolean ifFileNotExistOrEmpty(File file) throws FileNotFoundException {
         boolean metCondition = false;
         if (file == null || !file.exists() || file.length() == 0) {
-            System.out.println();
+            IO.println();
         } else {
             try (BufferedReader bfr = new BufferedReader(new FileReader(file))) {
                 int ch;

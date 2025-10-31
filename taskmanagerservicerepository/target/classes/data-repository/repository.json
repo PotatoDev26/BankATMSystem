@@ -1,26 +1,56 @@
 [
   {
-    "taskName": "Task 1",
-    "taskDescription": "Clean car"
+    "taskID": 20250001,
+    "taskName": "WRITE PROJECT PROPOSAL",
+    "taskDescription": "DRAFT THE INITIAL PROJECT PROPOSAL FOR THE CLIENT PRESENTATION.",
+    "state": "IN_PROGRESS"
   },
   {
-    "taskName": "Task 2",
-    "taskDescription": "Clean car"
+    "taskID": 20250002,
+    "taskName": "CODE REVIEW",
+    "taskDescription": "REVIEW THE PULL REQUESTS FROM THE DEVELOPMENT TEAM.",
+    "state": "IN_PROGRESS"
   },
   {
-    "taskName": "Task 5",
-    "taskDescription": "Clean car"
+    "taskID": 20250003,
+    "taskName": "DATABASE BACKUP",
+    "taskDescription": "PERFORM A FULL BACKUP OF THE PRODUCTION DATABASE.",
+    "state": "IN_PROGRESS"
   },
   {
-    "taskName": "Task 3",
-    "taskDescription": "Create a chatbot using Gemini API wrapper"
+    "taskID": 20250004,
+    "taskName": "UPDATE DOCUMENTATION",
+    "taskDescription": "REVISE AND UPDATE THE API DOCUMENTATION WITH THE LATEST ENDPOINTS.",
+    "state": "IN_PROGRESS"
   },
   {
-    "taskName": "Task 4",
-    "taskDescription": "Create speed"
+    "taskID": 20250005,
+    "taskName": "TEAM MEETING",
+    "taskDescription": "DISCUSS PROJECT MILESTONES AND DEADLINES WITH THE TEAM.",
+    "state": "IN_PROGRESS"
   },
   {
-    "taskName": "Task Whatever",
-    "taskDescription": "Suck a deer\u0027s toie"
+    "taskID": 20250006,
+    "taskName": "CREATE NEW REPOSITORY",
+    "taskDescription": "CREATE AND COMMIT PROJECT TO GIT",
+    "state": "IN_PROGRESS"
+  },
+  {
+    "taskID": 20250008,
+    "taskName": "TASK 2",
+    "taskDescription": "DNQIUBDIBSVBBFBOQ",
+    "state": "IN_PROGRESS"
+  },
+  {
+    "taskID": 20250009,
+    "taskName": "TASK 3",
+    "taskDescription": "NDSIUQBWDUYIQBWIUDBNOJAIDNCVQOIDUWNFOQIWND",
+    "state": "COMPLETE"
+  },
+  {
+    "taskID": 20250010,
+    "taskName": "CREATE A NEW PROJECT IN SPRING BOOT",
+    "taskDescription": "PRACTICE THE FUNDEMENTALS OF CODING IN SPRING BOOT AND THE PRINCIPLES (IOC, DEPENDENCY INJECTION, ETC.)",
+    "state": "IN_PROGRESS"
   }
 ]

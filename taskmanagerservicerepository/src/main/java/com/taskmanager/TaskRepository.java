@@ -7,5 +7,7 @@ public interface TaskRepository {
 
     public ArrayList<Task> retrieveTasks() throws Exception;
 
-    public void deleteTask(String task) throws Exception;
+    public void deleteTask(int ID) throws Exception;
+
+    public void markAsCompleteTask(int ID, Progress state) throws Exception;
 }
